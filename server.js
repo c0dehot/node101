@@ -4,9 +4,18 @@
  * npm install ascii-cats
  * npm install chalk
  */
+
+
+console.log( process.env.USER )
+
+console.log( process.argv )
+
+process.exit()
+
+
 const asciiCats = require('ascii-cats')
 const chalk = require('chalk')
-//import chalk from "chalk" // SAME as require
+// import chalk from "chalk"
 
 let name = "Fil"
 
@@ -28,7 +37,7 @@ console.log( myCatAsciiImage )
 console.log( `...............................` )
 
 // string concatenation - template literals
-console.log(`${chalk.blue("Hello")} World${chalk.red("!")}`);
+console.log(`${chalk.yellow("Hello")} World${chalk.red("!")}`);
  
 // chainable API
-console.log(chalk.blue.bgRed.bold("Hello world!"));
+console.log(chalk.green.bgRed.bold("Hello world!"));
