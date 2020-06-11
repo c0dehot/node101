@@ -58,10 +58,15 @@ async function mainApp() {
 
         // while loop will repeat (OPTIONAL)...
         const repeatResponse = await inquirer.prompt({
-            message: "Do you want to run again? :",
+            message: "Do you want to run again (yes,no,quit)? :",
             name: "runAgain"
             });
-        if( repeatResponse.runAgain.toLowerCase() !== 'yes' ){
+        if( repeatResponse.runAgain.toLowerCase() == 'quit' ){
+            // quit so kill our node process (no would quit too, but this is showing another option)
+            process.exit()
+            
+        } else if( repeatResponse.runAgain.toLowerCase() !== 'yes' ) {
+            // not yes, so stop loop
             repeatLoop = false
         }
     }
