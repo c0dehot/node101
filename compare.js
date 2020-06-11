@@ -1,7 +1,7 @@
 console.log( `Welcome to my compare.js file`)
 
-const param1 = process.argv[2]
-const param2 = process.argv[3]
+const param1 = process.argv[2].toLowerCase()
+const param2 = process.argv[3].toLowerCase()
 
 if( param1==undefined || param2==undefined ){
     console.log( `Usage: node compare.js <param1> <param2>` )

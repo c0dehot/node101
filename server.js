@@ -4,15 +4,6 @@
  * npm install ascii-cats
  * npm install chalk
  */
-
-
-console.log( process.env.USER )
-
-console.log( process.argv )
-
-process.exit()
-
-
 const asciiCats = require('ascii-cats')
 const chalk = require('chalk')
 // import chalk from "chalk"
@@ -29,7 +20,7 @@ function getTime(){
 console.log( `The date is: ${getTime()}` )
 
 // run our new npm package called 'ascii-cats'
-const myCatAsciiImage = asciiCats()
+const myCatAsciiImage = asciiCats('halloween')
 console.log( myCatAsciiImage )
 
 

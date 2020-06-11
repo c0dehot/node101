@@ -10,3 +10,7 @@ function readComplete( err, data ){
 }
 
 fs.readFile('README.md', 'utf8', readComplete)
+// fs.writeFile()
+// fs.appendFile()
+// fs.read()
+// fs.mkdir()
