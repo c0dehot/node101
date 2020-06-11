@@ -24,9 +24,11 @@ async function mainApp() {
     });
 
     <<<...>>> axios.get( `${movieUrl}&t=${movie}`)
+    // display Title + Actors
 
-    // wait 5s
-    // repeat?
+    // wait 5s (syncronously)
+
+    // repeat? ie run mainApp()
 }
 
 mainApp()
