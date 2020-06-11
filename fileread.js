@@ -9,7 +9,13 @@ function readComplete( err, data ){
     console.log( `Finished reading: '${data}'` )
 }
 
-fs.readFile('README.md', 'utf8', readComplete)
+async function mainApp(){
+    console.log( `starting mainApp ` )
+    let result = await fs.readFile('README.md', 'utf8', readComplete)
+    console.log( `We read the file`, result )
+}
+mainApp()
+
 // fs.writeFile()
 // fs.appendFile()
 // fs.read()

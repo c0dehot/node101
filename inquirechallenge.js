@@ -17,18 +17,40 @@ output the result AFTER we have got both questions answered
 */
 
 const inquirer = require("inquirer");
+let userInfo;
 
 async function mainApp(){
   const response = await inquirer
     .prompt([
-      {
-        type: "",
-        message: "",
-        name: ""
-      }
+        {   type: "input",
+            message: "What is your name?",
+            name: "userName" },
+        {
+            type: "input",
+            message: "Are you over 18",
+            name: "userAge"
+        }
     ])
+    userInfo = { ...userInfo, ...response }
 
-    console.log( `inquirer prompts finished, got response: `, response )
+    // object is created
+    //{ userName: "Fil", userAge: 45 }
+    if( response.userAge>18 ){
+        // new inquirer prompt
+        const response = await inquirer.prompt([
+            {   type: "input",
+                message: "What is your favourite alcoholic beverage?",
+                name: "favAlcohol" }
+        ])
+        userInfo = { ...userInfo, ...response }
+
+    } else {
+        console.log( `sorry kid, cant help you` )
+    }
+
+    console.log( `userInfo: `, userInfo )
   }
+  // runs async
   mainApp()
 
+  

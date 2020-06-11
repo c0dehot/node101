@@ -12,6 +12,7 @@ THEN get the movie info
 ... await it's response and display:
 movie Title & Actors!
 
+... wait 5 seconds, then ask if they want to try another one
 */
 
 const movieUrl = 'https://www.omdbapi.com/?apikey=trilogy'
@@ -24,6 +25,8 @@ async function mainApp() {
 
     <<<...>>> axios.get( `${movieUrl}&t=${movie}`)
 
+    // wait 5s
+    // repeat?
 }
 
 mainApp()
