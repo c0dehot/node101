@@ -47,8 +47,17 @@ else if( version=='sync' ){
         const readData = fs.readFileSync( emailFile, 'utf8' )
 
         console.log( `Read the file: ${readData}`)
-        
+
     } catch( err ){
         console.log( `Sorry we had a problem: `, err )
     }
+} else if( version=='promise' ){
+    // we are going make our own syncronous versions
+
+    function readFilePromise( filename ){
+        return new Promise( function( resolve, reject ){
+            fs.readFile( filename, 'utf8', resolve )
+        })
+    }
+    
 }
