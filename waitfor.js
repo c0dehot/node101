@@ -22,9 +22,14 @@ function waitFor(seconds) {
   console.log( `-----------------------------------`)
   console.log( `${showTime()} waitFor(5).then starting...`)
   waitFor(5).then( function(result){
-    console.log( `${showTime()} .then has completed` )
+    console.log( `${showTime()} .then has completed after 5s` )
   })
   
+  console.log( `${showTime()} waitFor(2).then starting...`)
+  waitFor(2).then( function(result){
+    console.log( `${showTime()} .then has completed after 2s` )
+  })
+
   async function mainApp(){
     let result = await waitFor(5)
     console.log( `${showTime()} await 5-seconds has completed` )
