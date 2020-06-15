@@ -1,6 +1,6 @@
 // Require/import the HTTP module
 const http = require("http");
-const PORT = 8080;
+const PORT = 7000;
 
 // Create a generic function to handle requests and responses
 function incomingAPICall(request, response) {

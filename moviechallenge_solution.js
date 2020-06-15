@@ -42,12 +42,12 @@ async function mainApp() {
         name: "movie"
         });
 
-        const movieName = response.movie
-        const movieResult = await axios.get( `${movieUrl}&t=${movieName}`)
+        const movieResult = await axios.get( `${movieUrl}&t=${response.movie}`)
         // display Title + Actors
         const movieData = movieResult.data
         console.log( `Movie: ${movieData.Title}, Actors: ${movieData.Actors} ` )
 
+        setTimeout( function(){ console.log( `we have waited 5 secnods`)}, 5000 )
         // REPEAT RECURSIVELY (weaker solution)
         // setTimeout( function(){
         //     mainApp()
@@ -55,12 +55,14 @@ async function mainApp() {
 
         // wait 5s (syncronously)
         await waitFor(5)
+        // only run AFTER 5 seconds
 
         // while loop will repeat (OPTIONAL)...
         const repeatResponse = await inquirer.prompt({
             message: "Do you want to run again (yes,no,quit)? :",
             name: "runAgain"
             });
+            
         if( repeatResponse.runAgain.toLowerCase() == 'quit' ){
             // quit so kill our node process (no would quit too, but this is showing another option)
             process.exit()
