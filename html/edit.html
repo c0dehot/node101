@@ -15,7 +15,7 @@
         <form>
             <div class="form-group">
               <label for="name">Name</label>
-              <input class="form-control" id="name" value="no name">
+              <input class="form-control" id="name" value="">
             </div>
             <div class="form-group">
                 <label for="role">Role</label>
@@ -44,8 +44,13 @@
 
             const postSettings = {
                 method: 'post',
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
                 body: JSON.stringify(editCharacter) // this is the payload
             }
+
             const saveResult = await fetch( "/api/edit-character", postSettings )
                                     .then( result=>result.json() )
             console.log( `.. POST completed, response: `, saveResult )

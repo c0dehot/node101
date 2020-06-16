@@ -7,10 +7,9 @@ const PORT = 3000;
 
 // look in 'html' FIRST and serve any static file
 app.use(express.static('html'))
-// app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
-
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 //
 // Data
 // ===========================================================
@@ -52,9 +51,6 @@ app.get(["/","/hobbies","/edit"], checkAuthorization, function(req, res) {
 });
 
 app.get("/character/:name", function(req, res) {
-  req.params = {
-    name: "obiwan"
-  }
   // /characters/obiwan/5000
   const name = req.params.name 
   console.log( `[/${name} called] showing ${name} object data ` )
@@ -79,12 +75,13 @@ app.get("/character/:name/:age", function(req, res) {
 
 app.post( "/api/edit-character", function( req, res ){
   // req.body
-  console.log( req )
-
   const newCharacter = req.body
-  console.log( `newCharacter: `, newCharacter )
+  // regex removes any non-alpha characters
+  // convert "Darth Sidius" => darthsidius
+  // convert Luke 'cool' WALKER => lukecoolwalker
+  const nameKey = newCharacter.name.toLowerCase().replace(/[\s0-9"'_+]/g,'')
 
-  characters[newCharacter.name] = newCharacter
+  characters[nameKey] = newCharacter
   console.log( `characters: `, characters )
 
   res.send( { status: true, message: `Cool beans, we save it for you` } )
