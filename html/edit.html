@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Star Wars Character</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div id='alertBox' class="alert alert-success d-none" role="alert">
+            Save was successful
+        </div>
+
+        <form>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input class="form-control" id="name" value="no name">
+            </div>
+            <div class="form-group">
+                <label for="role">Role</label>
+                <input class="form-control" id="role">
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input class="form-control" id="age">
+            </div>
+  
+            <button onClick="saveCharacter(event)" type="submit" class="btn btn-primary">Save</button>
+          </form>
+
+    </div>
+
+    <script>
+        async function saveCharacter(event){
+            event.preventDefault()
+
+            const editCharacter = {
+                name: document.querySelector('#name').value,
+                role: document.querySelector('#role').value,
+                age: document.querySelector('#age').value,
+                forcePoints: 500
+            }
+
+            const postSettings = {
+                method: 'post',
+                body: JSON.stringify(editCharacter) // this is the payload
+            }
+            const saveResult = await fetch( "/api/edit-character", postSettings )
+                                    .then( result=>result.json() )
+            console.log( `.. POST completed, response: `, saveResult )
+            
+            // show it successed
+            document.querySelector('#alertBox').classList.remove('d-none')
+            // hide after 5s
+            setTimeout( function(){
+                document.querySelector('#alertBox').classList.add('d-none')
+            }, 5000 )
+
+        }
+
+    </script>
+</body>
+</html>
