@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Star Wars Character</title>
+    <title>Table Reservation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body>
@@ -18,40 +18,37 @@
               <input class="form-control" id="name" value="">
             </div>
             <div class="form-group">
-                <label for="role">Role</label>
-                <input class="form-control" id="role">
+                <label for="email">Email</label>
+                <input class="form-control" id="email">
             </div>
             <div class="form-group">
-                <label for="age">Age</label>
-                <input class="form-control" id="age">
+                <label for="phone">Phone</label>
+                <input class="form-control" id="phone">
             </div>
   
-            <button onClick="saveCharacter(event)" type="submit" class="btn btn-primary">Save</button>
+            <button onClick="saveReservation(event)" type="submit" class="btn btn-primary">Save</button>
           </form>
 
     </div>
 
     <script>
-        async function saveCharacter(event){
+        async function saveReservation(event){
             event.preventDefault()
 
-            const editCharacter = {
+            const tableReservation = {
                 name: document.querySelector('#name').value,
-                role: document.querySelector('#role').value,
-                age: document.querySelector('#age').value,
-                forcePoints: 500
+                email: document.querySelector('#email').value,
+                phone: document.querySelector('#phone').value,
+                id: 'table-X'
             }
 
             const postSettings = {
                 method: 'post',
-                headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(editCharacter) // this is the payload
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(tableReservation) // this is the payload
             }
 
-            const saveResult = await fetch( "/api/edit-character", postSettings )
+            const saveResult = await fetch( "/api/reserve", postSettings )
                                     .then( result=>result.json() )
             console.log( `.. POST completed, response: `, saveResult )
             
@@ -60,8 +57,8 @@
 
             // clear the form
             document.querySelector('#name').value = ""
-            document.querySelector('#role').value = ""
-            document.querySelector('#age').value = ""
+            document.querySelector('#email').value = ""
+            document.querySelector('#phone').value = ""
             
             // hide after 5s
             setTimeout( function(){
