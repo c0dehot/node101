@@ -15,8 +15,9 @@ const notesList = [
 
 
 app.get("/api/notes", function(req, res) {
-  // send back the list of notes
-  res.send( notesList )
+    // console.log( `[/api/notes]` )
+    // send back the list of notes
+    res.send( notesList )
 });
 
 app.get("/api/notes/:id", function(req, res) {

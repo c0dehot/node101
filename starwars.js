@@ -50,17 +50,6 @@ app.get(["/","/hobbies","/edit"], checkAuthorization, function(req, res) {
   res.send("Welcome to the Star Wars Page!");
 });
 
-app.get("/character/:name", function(req, res) {
-  // /characters/obiwan/5000
-  const name = req.params.name 
-  console.log( `[/${name} called] showing ${name} object data ` )
-  if( characters.hasOwnProperty(name) ){
-    res.send(characters[name]);
-  } else {
-    res.send( { error: "No character found" } )
-  }
-});
-
 // to change a characters age
 app.get("/character/:name/:age", function(req, res) {
   const name = req.params.name 
@@ -72,6 +61,41 @@ app.get("/character/:name/:age", function(req, res) {
   }
   res.send( { name, message: `Changed age to ${req.params.age}` } )
 });
+
+app.get("/character/:name", function(req, res) {
+  // /character/obiwan  --> req.params = { name: "obiwan" }
+  const name = req.params.name 
+  console.log( `[/${name} called] showing ${name} object data ` )
+  if( characters.hasOwnProperty(name) ){
+    res.send(characters[name]);
+  } else {
+    res.send( { error: "No character found" } )
+  }
+});
+
+app.get("/api/character-list", function( req, res ){
+  res.send( characters )
+})
+
+app.get( "/api/new-character/:name/:role/:age", function( req, res ){
+  // req.body
+  const newCharacter = {
+    name: req.params.name,
+    role: req.params.role,
+    age: req.params.age,
+    forcePoints: 500
+  }
+  // regex removes any non-alpha characters
+  // convert "Darth Sidius" => darthsidius
+  // convert Luke 'cool' WALKER => lukecoolwalker
+  const nameKey = newCharacter.name.toLowerCase().replace(/[\s0-9"'_+]/g,'')
+
+  characters[nameKey] = newCharacter
+  console.log( `characters: `, characters )
+
+  res.send( { status: true, message: `Cool beans, we save it for you` } )
+})
+
 
 app.post( "/api/edit-character", function( req, res ){
   // req.body
