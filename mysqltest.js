@@ -41,7 +41,14 @@ const db = new Database({
 });
 
 async function mainApp(){
-    const userList = db.query( "SELECT * FROM users" )
+    const userList = await db.query( "SELECT * FROM users" )
     console.log( `userList: `, userList )
+    for( let i=0; i<userList.length; i++ ){
+        console.log( `userid='${userList[i].user_id}', username='${userList[i].username}'`)
+    }
+
+    userList.forEach( function( user ){
+        console.log( `userid='${user.user_id}', username='${user.username}'`)
+    })
 }
 mainApp()

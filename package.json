@@ -21,7 +21,9 @@
     "ascii-cats": "^1.1.1",
     "axios": "^0.19.2",
     "chalk": "^4.1.0",
+    "dotenv": "^8.2.0",
     "fs": "0.0.1-security",
+    "mysql": "^2.18.1",
     "node-fetch": "^2.6.0"
   }
 }
