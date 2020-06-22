@@ -59,7 +59,8 @@ async function mainApp(){
   dbResult = await db.query("SELECT * FROM products" )
   console.log( `READ complete, dbResult=`, dbResult )
 
-  process.exit()
+  // close database and thus now allows node to exist application
+  db.close()
 }
 mainApp()
 

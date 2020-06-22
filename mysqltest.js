@@ -4,9 +4,10 @@ require('dotenv').config()
 
 const mysql = require("mysql")
 
-const MYSQL_PORT = process.env.MYSQL_PORT || 3306
 
 // we will use this for making our mysql calls promises
+// start of your mysql boilerplate code copied
+const MYSQL_PORT = process.env.MYSQL_PORT || 3306
 class Database {
   constructor( config ) {
       this.connection = mysql.createConnection( config );
@@ -39,6 +40,7 @@ const db = new Database({
   database: process.env.DB_NAME,
   insecureAuth : true
 });
+// end of your mysql boilerplate code copied
 
 async function mainApp(){
     const userList = await db.query( "SELECT * FROM users" )
