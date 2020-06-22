@@ -42,25 +42,30 @@ async function mainApp(){
       flavor: "Rocky Road",
       price: 3.0,
       quantity: 50
-    } )
-  console.log( `INSERT complete, dbResult=`, dbResult )
+    } ) 
+  // --> INSERT INTO products SET flavour="Rocky Road", price=3.0, quantity=50
+  console.log( `INSERT complete, id=${dbResult.insertId}` )
 
   // update the rproduct 
   dbResult = await db.query( "UPDATE products SET ? WHERE ?",
     [ { quantity: 100 }, { flavor: "Rocky Road" } ] )
-  console.log( `UPDATE complete, dbResult=`, dbResult )
+  // UPDATE products SET quantity=100 WHERE flavor="Rocky Road"
+  console.log( `UPDATE complete, affectedRows=${dbResult.affectedRows}` )
 
   // delete
   dbResult = await db.query( "DELETE FROM products WHERE ?",
     { flavor: "strawberry" } )
-  console.log( `DELETE complete, dbResult=`, dbResult )
+  // DELETE FROM products WHERE flavor="strawberry"
+  console.log( `DELETE complete` )
 
   // read
   dbResult = await db.query("SELECT * FROM products" )
-  console.log( `READ complete, dbResult=`, dbResult )
-
+  console.log( `READ complete:` )
+  dbResult.forEach( function(icecream){
+      console.log( `id: ${icecream.id}, flavour: ${icecream.flavor}, quantity: ${icecream.quantity}, price $ ${icecream.price}` )
+  })
   // close database and thus now allows node to exist application
-  db.close()
+  await db.close()
 }
 mainApp()
 
